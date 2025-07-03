@@ -6,25 +6,47 @@ export default class FormSingUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: "",
+            nombre: "",
             email: "",
-            pass: ""
+            password: "",
+            rol_id: ""
         }
     }
 
     handleChangeName(event) {
-        this.setState({ name: event.target.value })
+        this.setState({ nombre: event.target.value })
     }
     handleChangeEmail(event) {
         this.setState({ email: event.target.value })
     }
     handleChangePass(event) {
-        this.setState({ pass: event.target.value })
+        this.setState({ password: event.target.value })
+    }
+
+    handleChangeRol(event) {
+        this.setState({ rol_id: event.target.value })
     }
 
     singUp() {
-        alert("Procesando su registro, verificar email.")
-    }
+    const { nombre, email, password, rol_id } = this.state;
+
+    axios.post('http://localhost:3000/usuarios', {
+        nombre: nombre,
+        email: email,
+        password: password,
+        rol_id: rol_id
+    })
+    .then(response => {
+        console.log('Usuario creado:', response.data);
+        Swal.fire('Éxito', 'Usuario creado correctamente', 'success');
+        // Si querés, podés limpiar el formulario:
+        this.setState({ nombre: '', email: '', password: '', rol_id: "" });
+    })
+    .catch(error => {
+        console.error('Error al crear usuario:', error);
+        Swal.fire('Error', 'No se pudo crear el usuario', 'error');
+    });
+}
 
     manejadorSubmit = e => {
         e.preventDefault();
@@ -34,7 +56,7 @@ export default class FormSingUp extends Component {
         return (
             <form className="mid-form" onSubmit={this.manejadorSubmit}>
                 <form className="form">
-                    <input required value={this.state.name} onChange={(e) => this.handleChangeName(e)} />
+                    <input required value={this.state.nombre} onChange={(e) => this.handleChangeName(e)} />
                     <label className="lbl-nombre">
                         <span className="text-nomb">Nombre</span>
                     </label>
@@ -48,9 +70,16 @@ export default class FormSingUp extends Component {
                 </form>
                 <br></br>
                 <form className="form">
-                    <input required  value={this.state.pass} onChange={(e) => this.handleChangePass(e)} type='password'/>
+                    <input required  value={this.state.password} onChange={(e) => this.handleChangePass(e)} type='password'/>
                     <label className="lbl-nombre">
                         <span className="text-nomb">Contraseña</span>
+                    </label>
+                </form>
+                <br></br>
+                 <form className="form">
+                    <input required  value={this.state.rol_id} onChange={(e) => this.handleChangeRol(e)} type='rol_id'/>
+                    <label className="lbl-nombre">
+                        <span className="text-nomb">Rol</span>
                     </label>
                 </form>
                 <br></br>
