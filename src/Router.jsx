@@ -12,6 +12,7 @@ import FormSingUp from "./components/login/FormSingUp";
 import ListProduct from "./components/listProduct/listProduct";
 import UpdateProduct from "./components/updateProduct/updateProduct";
 import CreateProduct from "./components/createProduct/createProduct";
+import MenuAdministrador from "./components/menuAdministrador/menuAdministador"
 
 export default class Router extends Component {
 render(){
@@ -31,7 +32,7 @@ render(){
             <Route exact path="/listProduct" element={<ListProduct />} />
             <Route exact path="/updateProduct" element={<UpdateProduct />} />
             <Route exact path="/createProduct" element={<CreateProduct />} />
-
+            <Route exact path="/menuAdministrador" element={<MenuAdministrador />} />   
             </Routes>
             <div className="clearfix"></div>
             <Footer/>

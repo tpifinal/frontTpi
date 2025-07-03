@@ -10,7 +10,7 @@ export default class Login extends Component {
         this.state = {
             user: {
                 email: "",
-                pass: ""
+                password: ""
             },
             resultLogin: null
         }
@@ -31,7 +31,30 @@ export default class Login extends Component {
     }
 
     login() {
-        alert("Pagina en mantenimiento.")
+     axios.post("http://localhost:3000/login", this.state.user)
+            .then(res => {
+                if (res.data === "Usuario no encontrado") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Usuario o contraseña incorrectos',
+                        confirmButtonColor: 'red',
+                    });
+                } else {
+                    localStorage.setItem("token", res.data.token);
+                    localStorage.setItem("user", JSON.stringify(res.data.user));
+                    window.location.href = "/menuAdministrador";
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Ocurrió un error al iniciar sesión',
+                    confirmButtonColor: 'red',
+                });
+            });
     }
 
     render() {
@@ -50,7 +73,7 @@ export default class Login extends Component {
                                 </label>
                             </form>
                             <form className="form">
-                                <input type="password" required name="pass" onChange={this.handleChange} />
+                                <input type="password" required name="password" onChange={this.handleChange} />
                                 <label className="lbl-nombre">
                                     <span className="text-nomb">Contraseña</span>
                                 </label>
@@ -58,9 +81,6 @@ export default class Login extends Component {
                             <div className="clearfix"></div>
                             <br />
                             <div className="cont-btn-login">
-                            <Link to="/singUp">
-                                <button type="submit" className="btn btn-singUp">Registrarme</button>
-                            </Link>
                                 <button onClick={() => this.login()} type="bottom" className="btn btn-confirmLogin">Ingresar</button></div>
                         </form>
                     </div>

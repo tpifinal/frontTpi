@@ -25,9 +25,6 @@ render(){
                     <li>
                         <NavLink to="/login" className={({isActive}) => (isActive ? "active" : 'none')} >Login</NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/listProduct" className={({isActive}) => (isActive ? "active" : 'none')} >Administrador</NavLink>
-                    </li>
                 </ul>
             </nav>
         </header>
