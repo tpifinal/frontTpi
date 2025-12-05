@@ -15,7 +15,7 @@ export default class MenuAdministrador extends Component {
               <Link to="/singUp">
                 <button className="btn-menu">Usuarios</button>
               </Link>
-              <Link to="/singUp">
+              <Link to="/listRoles">
                 <button className="btn-menu">Roles</button>
               </Link>
               <Link to="/singUp">

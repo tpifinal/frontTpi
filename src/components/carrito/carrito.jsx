@@ -16,6 +16,16 @@ export default class Carrito extends Component {
     this.obtenerProd();
   }
 
+  BorrarProducto = (id) => {
+    let productos = JSON.parse(localStorage.getItem("productos")) || [];
+
+    const filtrados = productos.filter((p) => p.id !== id);
+
+    localStorage.setItem("productos", JSON.stringify(filtrados));
+
+    this.setState({ productos: filtrados });
+  };
+
   obtenerProd() {
     let productos = JSON.parse(localStorage.getItem("productos"));
     if (productos) {
@@ -68,7 +78,10 @@ export default class Carrito extends Component {
         <div className="center">
           <div id="contenido-2">
             <h1 className="subheader"> Esta seccion del carrito</h1>
-            <ListaCarrito productosCarrito={this.state.productos} />
+            <ListaCarrito
+              productosCarrito={this.state.productos}
+              onDelete={this.BorrarProducto}
+            />
           </div>
           <div className="cont-btn-icon">
             <button onClick={() => this.total()} className="btn-comprar">
