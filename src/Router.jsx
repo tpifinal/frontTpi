@@ -15,6 +15,8 @@ import CreateProduct from "./components/createProduct/createProduct";
 import MenuAdministrador from "./components/menuAdministrador/menuAdministador";
 import ListRoles from "./components/roles/listRoles";
 import CreateRoles from "./components/roles/createRoles";
+import ListCat from "./components/createCategoria/listCatt";
+import CreateCat from "./components/createCategoria/createCat";
 export default class Router extends Component {
   render() {
     return (
@@ -34,6 +36,8 @@ export default class Router extends Component {
           <Route exact path="/updateProduct" element={<UpdateProduct />} />
           <Route exact path="/createProduct" element={<CreateProduct />} />
           <Route exact path="/createRoles" element={<CreateRoles />} />
+          <Route exact path="/listCat" element={<ListCat />} />
+          <Route exact path="/createCat" element={<CreateCat />} />
           <Route
             exact
             path="/menuAdministrador"
